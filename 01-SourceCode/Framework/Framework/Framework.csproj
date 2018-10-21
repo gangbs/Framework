@@ -105,11 +105,16 @@
     <Compile Include="Auth\TokenProtect.cs" />
     <Compile Include="Constants\RegularConstants.cs" />
     <Compile Include="Constants\StringConstants.cs" />
+    <Compile Include="DataBatch\IDatabaseBatch.cs" />
+    <Compile Include="DataBatch\MysqlBatch.cs" />
+    <Compile Include="DataBatch\OracleBatch.cs" />
+    <Compile Include="DataBatch\SqlBatch.cs" />
     <Compile Include="EF\BaseEFContext.cs" />
     <Compile Include="EF\BaseRepository.cs" />
     <Compile Include="EF\DbEntity.cs" />
     <Compile Include="EF\IBaseRepository.cs" />
     <Compile Include="ExpTree\Enum\CompareEnum.cs" />
+    <Compile Include="Extension\DataTableExtension.cs" />
     <Compile Include="Extension\EnumExtensions.cs" />
     <Compile Include="Extension\JsonExtensions.cs" />
     <Compile Include="ExpTree\Attribute\IgnoreAttribute.cs" />
@@ -138,6 +143,7 @@
     <Compile Include="VerifyCode\VerifyCodeStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Ado\" />
     <Folder Include="Filter\" />
     <Folder Include="Log\" />
     <Folder Include="MVC\" />

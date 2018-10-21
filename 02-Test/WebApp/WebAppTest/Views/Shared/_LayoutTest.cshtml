@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @*@Scripts.Render("~/bundlesTest/jquery");*@
+
+    @Styles.Render("~/bundles/easyui/css/themes")
+    @Styles.Render("~/bundles/easyui/css/icon")
+    @Scripts.Render("~/bundles/easyui/js")
+
+</head>
+<body>
+
+        @RenderBody()
+</body>
+</html>
