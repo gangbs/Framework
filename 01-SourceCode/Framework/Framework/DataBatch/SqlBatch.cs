@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
@@ -15,10 +17,25 @@ namespace Framework.DataBatch
         readonly string _connStr = "";
         readonly string _tableName = "";
 
-        public SqlBatch(string connStr,string tableName)
+        public SqlBatch(string connStr, string tableName)
         {
             this._connStr = connStr;
             this._tableName = tableName;
+        }
+
+        public string TableName => nameof(T);
+
+        public DbConnection DbConn
+        {
+            get
+            {
+                string providerName = ConfigurationManager.ConnectionStrings["DbConnection"].ProviderName;
+                string connStr= ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+                DbProviderFactory factory = DbProviderFactories.GetFactory(providerName);
+                var conn = factory.CreateConnection();
+                conn.ConnectionString = connStr;
+                return conn;
+            }
         }
 
         /// <summary>
