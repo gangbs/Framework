@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ado\DbUtility.cs" />
     <Compile Include="API\BaseApiController.cs" />
     <Compile Include="API\HttpBackCode.cs" />
     <Compile Include="API\HttpBackResult.cs" />
@@ -143,7 +144,6 @@
     <Compile Include="VerifyCode\VerifyCodeStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Ado\" />
     <Folder Include="Filter\" />
     <Folder Include="Log\" />
     <Folder Include="MVC\" />
