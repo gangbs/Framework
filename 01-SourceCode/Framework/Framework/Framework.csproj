@@ -135,6 +135,8 @@
     <Compile Include="Extension\JsonExtensions.cs" />
     <Compile Include="ExpTree\Attribute\IgnoreAttribute.cs" />
     <Compile Include="File\ExcelUtility.cs" />
+    <Compile Include="MVC\AjaxWebResponse.cs" />
+    <Compile Include="MVC\MvcBaseController.cs" />
     <Compile Include="Net\SMTP\EmailBuilder.cs" />
     <Compile Include="Net\SMTP\EmailContentBuilder.cs" />
     <Compile Include="Net\SMTP\IEmailSend.cs" />
@@ -162,7 +164,6 @@
   <ItemGroup>
     <Folder Include="Filter\" />
     <Folder Include="Log\" />
-    <Folder Include="MVC\" />
     <Folder Include="Threads\" />
   </ItemGroup>
   <ItemGroup>
