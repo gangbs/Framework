@@ -129,6 +129,7 @@
     <Compile Include="EF\BaseRepository.cs" />
     <Compile Include="EF\DbEntity.cs" />
     <Compile Include="EF\IBaseRepository.cs" />
+    <Compile Include="EF\SaveResult.cs" />
     <Compile Include="ExpTree\Enum\CompareEnum.cs" />
     <Compile Include="Extension\DataTableExtension.cs" />
     <Compile Include="Extension\EnumExtensions.cs" />

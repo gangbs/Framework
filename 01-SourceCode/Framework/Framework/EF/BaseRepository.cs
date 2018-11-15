@@ -89,7 +89,7 @@ namespace Framework.EF
 
         #region 增加
 
-        public int Insert(T entity, bool isSaveChange = true)
+        public SaveResult Insert(T entity, bool isSaveChange = true)
         {
             ////第一种方法
             //dbSet.Attach(entity);
@@ -98,47 +98,47 @@ namespace Framework.EF
             //第二种方法
             dbSet.Add(entity); //EntityState.Detached
 
-            return isSaveChange ? this.Save() : 0;
+            return isSaveChange ? this.Save() : null;
         }
-        public int InsertMany(IEnumerable<T> lst, bool isSaveChange = true)
+        public SaveResult InsertMany(IEnumerable<T> lst, bool isSaveChange = true)
         {
             dbSet.AddRange(lst);
 
-            return isSaveChange ? this.Save() : 0;
+            return isSaveChange ? this.Save() : null;
         }
-        public int BatchInsert(IEnumerable<T> lst)
-        {
-            int count = 0;
-            try
-            {
-                this.context.Configuration.AutoDetectChangesEnabled = false;
-                dbSet.AddRange(lst);
-                count = this.context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                count = 0;
-            }
-            finally
-            {
-                this.context.Configuration.AutoDetectChangesEnabled = true;
-            }
-            return count;
-        }
+        //public SaveResult BatchInsert(IEnumerable<T> lst)
+        //{
+        //    int count = 0;
+        //    try
+        //    {
+        //        this.context.Configuration.AutoDetectChangesEnabled = false;
+        //        dbSet.AddRange(lst);
+        //        count = this.context.SaveChanges();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        count = 0;
+        //    }
+        //    finally
+        //    {
+        //        this.context.Configuration.AutoDetectChangesEnabled = true;
+        //    }
+        //    return count;
+        //}
 
         #endregion
 
         #region 编辑
 
-        public int Update(T entity, bool isSaveChange = true)
+        public SaveResult Update(T entity, bool isSaveChange = true)
         {
             dbSet.Attach(entity);
             context.Entry(entity).State = EntityState.Modified;
 
-            return isSaveChange ? this.Save() : 0;
+            return isSaveChange ? this.Save() : null;
         }
 
-        public int UpdateProperty(Expression<Func<T, bool>> filter, string filedName, object filedValue, bool isSaveChange = true)
+        public SaveResult UpdateProperty(Expression<Func<T, bool>> filter, string filedName, object filedValue, bool isSaveChange = true)
         {
             var lstEntity = this.dbSet.Where(filter);
             try
@@ -150,12 +150,12 @@ namespace Framework.EF
             }
             catch
             {
-                return 0;
+                return null;
             }
-            return isSaveChange ? this.Save() : 0;
+            return isSaveChange ? this.Save() : null;
         }
 
-        public int UpdatePropertys(Expression<Func<T, bool>> filter, Dictionary<string, object> fileds, bool isSaveChange = true)
+        public SaveResult UpdatePropertys(Expression<Func<T, bool>> filter, Dictionary<string, object> fileds, bool isSaveChange = true)
         {
             var lstEntity = this.dbSet.Where(filter);
             try
@@ -170,75 +170,80 @@ namespace Framework.EF
             }
             catch
             {
-                return 0;
+                return null;
             }
-            return isSaveChange ? this.Save() : 0;
+            return isSaveChange ? this.Save() : null;
         }
 
-        public int UpdatePropertys(Expression<Func<T, bool>> filter, Action<T> change, bool isSaveChange = true)
+        public SaveResult UpdatePropertys(Expression<Func<T, bool>> filter, Action<T> change, bool isSaveChange = true)
         {
             var lstEntity = this.dbSet.Where(filter);
             foreach (var entity in lstEntity)
             {
                 change(entity);
             }
-            return isSaveChange ? this.Save() : 0;
+            return isSaveChange ? this.Save() : null;
         }
 
         #endregion
 
         #region 删除
 
-        public int Delete(bool isSaveChange = true, params object[] key)
+        public SaveResult Delete(bool isSaveChange = true, params object[] key)
         {
             T entity = this.dbSet.Find(key);
             return this.Delete(entity, isSaveChange);
         }
 
-        public int Delete(T entity, bool isSaveChange = true)
+        public SaveResult Delete(T entity, bool isSaveChange = true)
         {
             dbSet.Remove(entity);
-            return isSaveChange ? this.Save() : 0;
+            return isSaveChange ? this.Save() : null;
         }
 
-        public int Delete(Expression<Func<T, bool>> filter, bool isSaveChange = true)
+        public SaveResult Delete(Expression<Func<T, bool>> filter, bool isSaveChange = true)
         {
             var lst = this.dbSet.Where(filter);
             dbSet.RemoveRange(lst);
-            return isSaveChange ? this.Save() : 0;
+            return isSaveChange ? this.Save() : null;
         }
 
         #endregion
 
         #region 保存变更
 
-        protected int Save()
+        protected SaveResult Save()
         {
-            string errMsg = "";
-            return Save(out errMsg);
-        }
-        protected int Save(out string errMsg)
-        {
-            errMsg = "";
-            int count = 0;
+            SaveResult r ;
             try
             {
-                count = context.SaveChanges();
+               int count = context.SaveChanges();
+                r = new SaveResult { IsSuccess=true, Rows=count };
             }
             catch (DbUpdateException exp)
             {
-                errMsg = exp.InnerException.InnerException.Message;
+                r = new SaveResult {IsSuccess=false, Message=exp.InnerException.InnerException.Message };
             }
-            return count;
+            return r;
         }
 
         #endregion
 
         #region 其它
 
-        public int ExcuteSqlCommand(string sql, object[] parameters)
+        public SaveResult ExcuteSqlCommand(string sql, object[] parameters)
         {
-            return this.context.Database.ExecuteSqlCommand(sql, parameters);
+            SaveResult r;
+            try
+            {
+                int count= this.context.Database.ExecuteSqlCommand(sql, parameters);
+                r = new SaveResult { IsSuccess=true, Rows=count };
+            }
+            catch(Exception exp)
+            {
+                r = new SaveResult { IsSuccess=false, Message=exp.Message };
+            }
+            return r;
         }
 
         public bool IsExist(Expression<Func<T, bool>> filter)

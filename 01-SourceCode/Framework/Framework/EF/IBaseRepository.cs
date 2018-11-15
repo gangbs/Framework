@@ -35,39 +35,39 @@ namespace Framework.EF
 
         #region 增加
 
-        int Insert(T entity, bool isSaveChange = true);
+        SaveResult Insert(T entity, bool isSaveChange = true);
 
-        int InsertMany(IEnumerable<T> lst, bool isSaveChange = true);
+        SaveResult InsertMany(IEnumerable<T> lst, bool isSaveChange = true);
 
-        int BatchInsert(IEnumerable<T> lst);
+        //SaveResult BatchInsert(IEnumerable<T> lst);
 
         #endregion
 
         #region 编辑
 
-        int Update(T entity, bool isSaveChange = true);
+        SaveResult Update(T entity, bool isSaveChange = true);
 
-        int UpdateProperty(Expression<Func<T, bool>> filter, string filedName, object filedValue, bool isSaveChange = true);
+        SaveResult UpdateProperty(Expression<Func<T, bool>> filter, string filedName, object filedValue, bool isSaveChange = true);
 
-        int UpdatePropertys(Expression<Func<T, bool>> filter, Dictionary<string, object> fileds, bool isSaveChange = true);
+        SaveResult UpdatePropertys(Expression<Func<T, bool>> filter, Dictionary<string, object> fileds, bool isSaveChange = true);
 
-        int UpdatePropertys(Expression<Func<T, bool>> filter, Action<T> change, bool isSaveChange = true);
+        SaveResult UpdatePropertys(Expression<Func<T, bool>> filter, Action<T> change, bool isSaveChange = true);
 
         #endregion
 
         #region 删除
 
-        int Delete(bool isSaveChange = true, params object[] key);
+        SaveResult Delete(bool isSaveChange = true, params object[] key);
 
-        int Delete(T Entity, bool isSaveChange = true);
+        SaveResult Delete(T Entity, bool isSaveChange = true);
 
-        int Delete(Expression<Func<T, bool>> filter, bool isSaveChange = true);
+        SaveResult Delete(Expression<Func<T, bool>> filter, bool isSaveChange = true);
 
         #endregion
 
         #region 其它
 
-        int ExcuteSqlCommand(string sql, object[] parameters);
+        SaveResult ExcuteSqlCommand(string sql, object[] parameters);
 
         bool IsExist(Expression<Func<T, bool>> filter);
 
