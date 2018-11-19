@@ -131,10 +131,12 @@
     <Compile Include="EF\IBaseRepository.cs" />
     <Compile Include="EF\SaveResult.cs" />
     <Compile Include="ExpTree\Enum\CompareEnum.cs" />
+    <Compile Include="Extension\ClaimsIdentityExtension.cs" />
     <Compile Include="Extension\DataTableExtension.cs" />
     <Compile Include="Extension\EnumExtensions.cs" />
     <Compile Include="Extension\JsonExtensions.cs" />
     <Compile Include="ExpTree\Attribute\IgnoreAttribute.cs" />
+    <Compile Include="Extension\XmlExtension.cs" />
     <Compile Include="File\ExcelUtility.cs" />
     <Compile Include="MVC\AjaxWebResponse.cs" />
     <Compile Include="MVC\MvcBaseController.cs" />
