@@ -163,6 +163,7 @@
     <Compile Include="VerifyCode\Strategy\RandomNumCode.cs" />
     <Compile Include="VerifyCode\VerifyCodeContext.cs" />
     <Compile Include="VerifyCode\VerifyCodeStrategy.cs" />
+    <Compile Include="Windows\RegistryOperation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Filter\" />
