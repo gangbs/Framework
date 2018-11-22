@@ -136,6 +136,7 @@
     <Compile Include="Extension\EnumExtensions.cs" />
     <Compile Include="Extension\JsonExtensions.cs" />
     <Compile Include="ExpTree\Attribute\IgnoreAttribute.cs" />
+    <Compile Include="Extension\QueryableExtension.cs" />
     <Compile Include="Extension\XmlExtension.cs" />
     <Compile Include="File\ExcelUtility.cs" />
     <Compile Include="MVC\AjaxWebResponse.cs" />
