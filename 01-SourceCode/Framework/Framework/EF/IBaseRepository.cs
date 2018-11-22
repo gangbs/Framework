@@ -17,6 +17,8 @@ namespace Framework.EF
 
         T Get(Expression<Func<T, bool>> fliter);
 
+        bool TryGet(Expression<Func<T, bool>> fliter,out T entity);
+
         IQueryable<T> GetAllIncluding<TProperty>(Expression<Func<T, TProperty>> propertySelectors);
 
         IEnumerable<T> GetAll();

@@ -45,6 +45,11 @@ namespace Framework.EF
         {
             return this.dbSet.Where(filter).AsNoTracking().FirstOrDefault();
         }
+        public bool TryGet(Expression<Func<T, bool>> filter, out T entity)
+        {
+            entity = this.Get(filter);
+            return entity != null ? true : false;
+        }
         public IQueryable<T> GetAllIncluding<TProperty>(Expression<Func<T, TProperty>> propertySelectors)
         {
             return this.dbSet.Include<T, TProperty>(propertySelectors);
