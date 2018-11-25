@@ -16,7 +16,7 @@ namespace Framework
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string ToXml<T>(this T obj) where T : class
+        public static string ObjectToXml<T>(this T obj) where T : class
         {
             using (MemoryStream stream = new MemoryStream())
             {
@@ -37,7 +37,7 @@ namespace Framework
         /// <typeparam name="T"></typeparam>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public static T ToObject<T>(this string xml) where T : class
+        public static T XmlToObject<T>(this string xml) where T : class
         {
             using (StringReader sr = new StringReader(xml))
             {
