@@ -140,8 +140,7 @@
     <Compile Include="Extension\QueryableExtension.cs" />
     <Compile Include="Extension\XmlExtension.cs" />
     <Compile Include="File\ExcelUtility.cs" />
-    <Compile Include="Map\ExpTreeMap.cs" />
-    <Compile Include="Map\IObjectMap.cs" />
+    <Compile Include="Map\ObjectMap.cs" />
     <Compile Include="MVC\AjaxWebResponse.cs" />
     <Compile Include="MVC\MvcBaseController.cs" />
     <Compile Include="Net\SMTP\EmailBuilder.cs" />

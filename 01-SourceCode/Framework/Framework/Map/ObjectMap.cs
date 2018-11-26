@@ -39,9 +39,8 @@ namespace Framework
 
             foreach (var m in typeof(TTarget).GetProperties())
             {
-                if (!m.CanWrite) continue;
-                var memberInSource = typeof(TSource).GetProperty(m.Name);
-                if (memberInSource == null) continue;
+                PropertyInfo memberInSource = null;
+                if (!IsMemberNeedMap(m,out memberInSource, null)) continue;
 
                 var MemberExp = Expression.Property(parameter, memberInSource);
                 var ma = Expression.Bind(m, MemberExp);
@@ -56,8 +55,9 @@ namespace Framework
             return exp.Compile();
         }
 
-        private static bool IsMemberNeedMap(PropertyInfo m, params string[] excludeMembers)
+        private static bool IsMemberNeedMap(PropertyInfo m,out PropertyInfo memberInSource, params string[] excludeMembers)
         {
+            memberInSource = null;
             if (!m.CanWrite)
             {
                 return false;
@@ -67,37 +67,15 @@ namespace Framework
             {
                 return false;
             }
-            var memberInSource = typeof(TSource).GetProperty(m.Name);
+            memberInSource = typeof(TSource).GetProperty(m.Name);
             if (memberInSource == null)
             {
                 return false;
             }
-
 
             return true;
         }
 
         private static Func<TSource, TTarget> MapFun = CreateExpression();
     }
-
-    public static class ClassExtensions
-    {
-        public static T InEntityFrom<T, K>(this T target, K source) where T : class where K : class
-        {
-            var pros = typeof(T).GetProperties();
-            var spros = typeof(K).GetProperties();
-            var dic = (from t in spros select new KeyValuePair<string, object>(t.Name, t.GetValue(source, null))).ToDictionary(m => m.Key, m => m.Value);
-
-            foreach (var p in pros)
-            {
-                if (dic.ContainsKey(p.Name))
-                {
-                    p.SetValue(target, dic[p.Name], null);
-                }
-            }
-            return target;
-        }
-    }
-
-
 }

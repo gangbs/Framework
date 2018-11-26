@@ -8,7 +8,7 @@ namespace Framework
 {
    public static class ClassExtension
     {
-        public static TTarget MapTo<TSource, TTarget>(this TSource obj) //where TTarget : class, new() where TSource:class;
+        public static TTarget MapTo<TSource, TTarget>(this TSource obj) where TTarget : class, new() where TSource:class
         {
             var sPros = typeof(TSource).GetProperties();
             var tPros = typeof(TTarget).GetProperties();
@@ -26,6 +26,15 @@ namespace Framework
                 }
             }
             return target;
+        }
+
+        public static IEnumerable<TTarget> MapTo<TSource, TTarget>(this IEnumerable<TSource> lstSource) where TTarget : class, new() where TSource : class
+        {
+            if (lstSource == null) return null;
+
+            var lstTarget = from item in lstSource
+                            select item.MapTo<TSource, TTarget>();
+            return lstTarget;
         }
     }
 }
