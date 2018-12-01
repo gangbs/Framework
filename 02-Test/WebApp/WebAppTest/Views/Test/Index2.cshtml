@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index2</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery-easyui-1.5.5.6/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery-easyui-1.5.5.6/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../demo.css">
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.5.5.6/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Content/jquery-easyui-1.5.5.6/jquery.easyui.min.js"></script>
+</head>
+<body>
+    <form id="fm1" method="post"  enctype="multipart/form-data">
+
+        <input name="excel" class="easyui-filebox" label="File1:" labelPosition="top" data-options="prompt:'Choose a file...'" style="width:300px">
+
+        <input type="button" value="上传" onclick="submitFile()" />
+    </form>
+</body>
+</html>
+
+<script>
+
+
+    function submitFile() {
+
+        $('#fm1').form('submit', {
+            url:"@Url.Action("Upload")",
+            onSubmit: function () { },
+            success: function () { }
+
+        });
+    }
+
+
+
+
+
+</script>

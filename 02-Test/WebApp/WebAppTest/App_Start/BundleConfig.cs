@@ -11,11 +11,13 @@ namespace WebAppTest
 
             #region rewritrCssUrl
 
-            bundles.Add(new StyleBundle("~/bundles/easyui/css/themes").Include(
-                "~/Content/jquery-easyui-1.5.5.6/themes/default/easyui.css"),new CssRewriteUrlTransform());//
+            //bundles.Add(new StyleBundle("~/bundles/easyui/css/themes").Include(
+            //    "~/Content/jquery-easyui-1.5.5.6/themes/default/easyui.css"),new CssRewriteUrlTransform());//
 
-            bundles.Add(new StyleBundle("~/bundles/easyui/css/icon").Include(
-                "~/Content/jquery-easyui-1.5.5.6/themes/icon.css"), new CssRewriteUrlTransform());//
+            //bundles.Add(new StyleBundle("~/bundles/easyui/css/icon").Include(
+            //    "~/Content/jquery-easyui-1.5.5.6/themes/icon.css"), new CssRewriteUrlTransform());//
+
+            
 
 
             //"~/Content/jquery-easyui-1.5.5.6/demo/demo.css""~/Content/jquery-easyui-1.5.5.6/themes/icon.css",
