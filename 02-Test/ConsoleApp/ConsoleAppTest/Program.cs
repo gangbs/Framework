@@ -14,11 +14,13 @@ namespace ConsoleAppTest
         static void Main(string[] args)
         {
 
-            ReflectMap(10000);
+            ExpTreeMap(10000);
 
-            ReflectMap(10000);
+            ExpTreeMap(10000);
 
-            ReflectMap(10000);
+            ExpTreeMap(10000);
+
+            Console.ReadLine();
 
         }
 
@@ -53,8 +55,7 @@ namespace ConsoleAppTest
                 var s = new Student { Id = i, Age = i, Name = "yyg" + i };
                 lst.Add(s);
             }
-            var lst2 = from item in lst
-                       select new StudentSecond().InEntityFrom(item);
+            var lst2 = lst.MapTo<Student, StudentSecond>();
 
             sw.Stop();
             Console.WriteLine($"完成映射，耗时 {sw.ElapsedMilliseconds} 毫秒");
