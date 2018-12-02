@@ -36,5 +36,21 @@ namespace Framework
                             select item.MapTo<TSource, TTarget>();
             return lstTarget;
         }
+
+        public static TTarget MapTo<TSource, TTarget>(this TSource obj,Action<TTarget> action) where TTarget : class, new() where TSource : class
+        {
+           var toObj= obj.MapTo<TSource, TTarget>();
+            action(toObj);
+            return toObj;
+        }
+
+        public static IEnumerable<TTarget> MapTo<TSource, TTarget>(this IEnumerable<TSource> lstSource, Action<TTarget> action) where TTarget : class, new() where TSource : class
+        {
+            if (lstSource == null) return null;
+
+            var lstTarget = from item in lstSource
+                            select item.MapTo<TSource, TTarget>(action);
+            return lstTarget;
+        }
     }
 }
