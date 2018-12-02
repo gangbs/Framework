@@ -202,7 +202,9 @@ namespace Framework.EF
 
         public SaveResult Delete(T entity, bool isSaveChange = true)
         {
-            dbSet.Remove(entity);
+            //dbSet.Remove(entity);
+            dbSet.Attach(entity);
+            context.Entry(entity).State = EntityState.Deleted;
             return isSaveChange ? this.Save() : null;
         }
 
