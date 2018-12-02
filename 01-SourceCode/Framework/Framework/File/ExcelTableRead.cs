@@ -13,13 +13,15 @@ namespace Framework
     {
         private Dictionary<int, PropertyInfo> _colMap;
         protected abstract int _rowBegin { get; }
-        /// <summary>
-        /// 若值为-1则为NPOI认为的最后一行
-        /// </summary>
-        protected virtual int _rowEnd => -1;
+        private int _rowEnd ; 
 
 
         protected abstract Dictionary<int, PropertyInfo> DefineColumnMap();
+
+        protected virtual int DefineRowEnd(ISheet sheet)
+        {
+            return sheet.LastRowNum;
+        }
 
         protected virtual IWorkbook ReadWorkbook(byte[] file)
         {
@@ -85,9 +87,8 @@ namespace Framework
             this._colMap = DefineColumnMap();
             IWorkbook workbook = this.ReadWorkbook(file);
             ISheet sheet = this.ReadSheet(workbook);
-
-            int rowEnd = this._rowEnd == -1 ? sheet.LastRowNum : this._rowEnd;
-            List<T> lst = this.ReadTable(sheet, this._rowBegin, rowEnd, this._colMap);
+            this._rowEnd =this.DefineRowEnd(sheet);
+            List<T> lst = this.ReadTable(sheet, this._rowBegin, this._rowEnd, this._colMap);
             return lst;
         }
 
