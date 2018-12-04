@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Framework.Redis
+namespace Framework
 {
     /// <summary>
     /// 表示string的操作
