@@ -31,8 +31,6 @@ namespace WebAppTest
             #endregion
 
 
-
-
             #region
 
             bundles.UseCdn = true;

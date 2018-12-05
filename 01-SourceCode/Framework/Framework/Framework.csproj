@@ -119,6 +119,8 @@
     <Compile Include="API\HttpResponseExtension.cs" />
     <Compile Include="API\HttpResponseResult.cs" />
     <Compile Include="Auth\TokenProtect.cs" />
+    <Compile Include="Comparer\ExpPropertyComparer.cs" />
+    <Compile Include="Comparer\RefPropertyComparer.cs" />
     <Compile Include="Constants\RegularConstants.cs" />
     <Compile Include="Constants\StringConstants.cs" />
     <Compile Include="DataBatch\IDatabaseBatch.cs" />
