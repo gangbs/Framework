@@ -156,6 +156,7 @@
     <Compile Include="ExpTree\QueryExpression.cs" />
     <Compile Include="QRCode\QRCodeBuilder.cs" />
     <Compile Include="Redis\RedisBase.cs" />
+    <Compile Include="Redis\RedisHashCache.cs" />
     <Compile Include="Redis\RedisManager.cs" />
     <Compile Include="Redis\RedisStringCache.cs" />
     <Compile Include="Reflection\DynamicHandlerCompiler.cs" />

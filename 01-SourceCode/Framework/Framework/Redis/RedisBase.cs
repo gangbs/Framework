@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Framework.Redis
+namespace Framework
 {
     public abstract class RedisBase
     {
         readonly ConnectionMultiplexer db = null;
         readonly string prefix = string.Empty;
         readonly int dbNumber = 0;
+        
 
         public RedisBase(int dbnum, string prefix, string connectionString = null)
         {
@@ -43,6 +44,11 @@ namespace Framework.Redis
         {
             db.GetDatabase(dbNumber);
             return func(db.GetDatabase(dbNumber));
+        }
+
+        protected IDatabase GetDatabase()
+        {
+            return db.GetDatabase(dbNumber);
         }
 
         /// <summary>
