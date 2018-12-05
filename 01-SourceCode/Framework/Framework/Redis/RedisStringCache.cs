@@ -29,7 +29,7 @@ namespace Framework
         public bool StringSet(string key, string val, TimeSpan? exp = default(TimeSpan?))
         {
             key = this.GenRealKey(key);
-            return this.DoSave(db => db.StringSet(key, val, exp));
+            return this.DbHandler(db => db.StringSet(key, val, exp));
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Framework
         {
             key = this.GenRealKey(key);
             string json = this.ConvertJson(obj);
-            return this.DoSave(db => db.StringSet(key, json, exp));
+            return this.DbHandler(db => db.StringSet(key, json, exp));
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Framework
             {
                 key = this.GenRealKey(key);
             }
-            return this.DoSave(db => db.StringGet(key));
+            return this.DbHandler(db => db.StringGet(key));
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Framework
             try
             {
                 if (addPrefix) key = this.GenRealKey(key);
-                var val = this.DoSave(db => db.StringGet(key));
+                var val = this.DbHandler(db => db.StringGet(key));
                 return this.ConvertObj<T>(val);
             }
             catch
@@ -90,7 +90,7 @@ namespace Framework
         public double StringIncrement(string key, double val = 1)
         {
             key = this.GenRealKey(key);
-            return this.DoSave(db => db.StringIncrement(key, val));
+            return this.DbHandler(db => db.StringIncrement(key, val));
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Framework
         public double StringDecrement(string key, double val = 1)
         {
             key = this.GenRealKey(key);
-            return this.DoSave(db => db.StringDecrement(key, val));
+            return this.DbHandler(db => db.StringDecrement(key, val));
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Framework
         public bool Update(List<KeyValuePair<string, string>> KeyVal, bool addPrefix = true)
         {
             KeyValuePair<RedisKey, RedisValue>[] newkey = KeyVal.Select(k => new KeyValuePair<RedisKey, RedisValue>(addPrefix ? this.GenRealKey(k.Key) : k.Key, k.Value)).ToArray();
-            return this.DoSave(db => db.StringSet(newkey.ToArray(), When.Exists));
+            return this.DbHandler(db => db.StringSet(newkey.ToArray(), When.Exists));
         }
 
 
@@ -131,7 +131,7 @@ namespace Framework
         public async Task<bool> StringSetAsync(string key, string val, TimeSpan? exp = default(TimeSpan?))
         {
             key = this.GenRealKey(key);
-            return await this.DoSave(db => db.StringSetAsync(key, val, exp));
+            return await this.DbHandler(db => db.StringSetAsync(key, val, exp));
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Framework
         public async Task<bool> StringSetAsync(List<KeyValuePair<RedisKey, RedisValue>> KeyVal)
         {
             List<KeyValuePair<RedisKey, RedisValue>> newkey = KeyVal.Select(k => new KeyValuePair<RedisKey, RedisValue>(this.GenRealKey(k.Key), k.Value)).ToList();
-            return await this.DoSave(db => db.StringSetAsync(newkey.ToArray()));
+            return await this.DbHandler(db => db.StringSetAsync(newkey.ToArray()));
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Framework
         {
             key = this.GenRealKey(key);
             string json = this.ConvertJson(obj);
-            return await this.DoSave(db => db.StringSetAsync(key, json, exp));
+            return await this.DbHandler(db => db.StringSetAsync(key, json, exp));
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Framework
         public async Task<string> StringGetAsync(string key)
         {
             key = this.GenRealKey(key);
-            return await this.DoSave(db => db.StringGetAsync(key));
+            return await this.DbHandler(db => db.StringGetAsync(key));
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace Framework
         public async Task<T> StringGetAsync<T>(string key)
         {
             key = this.GenRealKey(key);
-            var val = await this.DoSave(db => db.StringGetAsync(key));
+            var val = await this.DbHandler(db => db.StringGetAsync(key));
             return this.ConvertObj<T>(val);
         }
 
@@ -192,7 +192,7 @@ namespace Framework
         public async Task<double> StringIncrementAsync(string key, double val = 1)
         {
             key = this.GenRealKey(key);
-            return await this.DoSave(db => db.StringIncrementAsync(key, val));
+            return await this.DbHandler(db => db.StringIncrementAsync(key, val));
         }
         /// <summary>
         /// 为数字减少val
@@ -203,7 +203,7 @@ namespace Framework
         public async Task<double> StringDecrementAsync(string key, double val = 1)
         {
             key = this.GenRealKey(key);
-            return await this.DoSave(db => db.StringDecrementAsync(key, val));
+            return await this.DbHandler(db => db.StringDecrementAsync(key, val));
         }
 
         #endregion

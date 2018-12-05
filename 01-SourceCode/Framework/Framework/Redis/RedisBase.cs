@@ -34,22 +34,17 @@ namespace Framework
             return prefix + "_" + key;
         }
 
-        /// <summary>
-        /// 执行保存
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="func"></param>
-        /// <returns></returns>
-        protected T DoSave<T>(Func<IDatabase, T> func)
+
+        protected T DbHandler<T>(Func<IDatabase, T> func)
         {
-            db.GetDatabase(dbNumber);
             return func(db.GetDatabase(dbNumber));
         }
 
-        protected IDatabase GetDatabase()
-        {
-            return db.GetDatabase(dbNumber);
+        protected void DbHandler(Action<IDatabase> action)
+        { 
+            action(db.GetDatabase(dbNumber));
         }
+        
 
         /// <summary>
         /// 删除
