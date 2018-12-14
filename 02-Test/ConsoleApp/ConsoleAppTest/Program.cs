@@ -1,4 +1,5 @@
 ﻿using Framework;
+using NCalc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,14 +15,40 @@ namespace ConsoleAppTest
         static void Main(string[] args)
         {
 
-            ExpTreeMap(10000);
+            //ExpTreeMap(10000);
 
-            ExpTreeMap(10000);
+            //ExpTreeMap(10000);
 
-            ExpTreeMap(10000);
+            //ExpTreeMap(10000);
+            int a1 = 4, a2 = 5;
+            string exp1 = "[a1]*[Pi]";
+            NCalc.Expression e = new NCalc.Expression(exp1);
+            e.Parameters["a1"] = a1;
+            e.Parameters["a2"] = a2;
+
+            e.EvaluateParameter += delegate (string name, ParameterArgs arg)
+            {
+                if (name == "Pi")
+                    arg.Result = 2;
+            };
+
+            var r = e.Evaluate();
+
+            //string exp2 = $"tag(\"tag1\",123)";
+
+            //NCalc.Expression e2 = new NCalc.Expression(exp2);
+
+            //e2.EvaluateFunction += (name, arg) =>
+            //{
+            //    if(name== "tag")
+            //    {
+            //       var p= arg.Parameters;
+            //    }
+            //};
+
+            //e2.Evaluate();
 
             Console.ReadLine();
-
         }
 
 
