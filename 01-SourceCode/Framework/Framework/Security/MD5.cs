@@ -31,6 +31,7 @@ namespace Framework
                 StringBuilder result = new StringBuilder();
                 System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create();
                 byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(str));
+                
                 for (int i = 0; i < s.Length; i++)
                 {
                     result.Append(s[i].ToString("x"));
