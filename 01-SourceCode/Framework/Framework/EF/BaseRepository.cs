@@ -229,7 +229,7 @@ namespace Framework.EF
             }
             catch (DbUpdateException exp)
             {
-                r = new SaveResult {IsSuccess=false, Message=exp.InnerException.InnerException.Message };
+                r = new SaveResult {IsSuccess=false, Message=exp.InnerException.Message };
             }
             return r;
         }
