@@ -88,13 +88,13 @@ namespace Framework
                         exp = Expression.LessThanOrEqual(member, constant);
                         break;
                     case CompareEnum.Like:
-                        exp = Expression.Call(member, typeof(string).GetMethod(nameof(string.Contains)), constant);
+                        exp = Expression.Call(member, typeof(string).GetMethod(nameof(string.Contains), new Type[] { typeof(string) }), constant);
                         break;
                     case CompareEnum.LeftLike:
                         exp = Expression.Call(member, typeof(string).GetMethod(nameof(string.StartsWith), new Type[] { typeof(string) }), constant);
                         break;
                     case CompareEnum.RightLike:
-                        exp = Expression.Call(member, typeof(string).GetMethod(nameof(string.EndsWith)), constant);
+                        exp = Expression.Call(member, typeof(string).GetMethod(nameof(string.EndsWith), new Type[] { typeof(string) }), constant);
                         break;
                     default:
                         exp = Expression.Equal(member, constant);
