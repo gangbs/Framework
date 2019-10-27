@@ -16,7 +16,7 @@ namespace Framework
         {
             if (propertyInfo == null)
             {
-                throw new ArgumentException("参数不可为空！");
+                throw new ArgumentException("参数不可为空！");ISet
             }
             this.propertyValueFunc = GenFun(propertyInfo);
         }

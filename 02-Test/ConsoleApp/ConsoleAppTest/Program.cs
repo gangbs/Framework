@@ -1,6 +1,7 @@
 ﻿using Framework;
 using NCalc;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -49,6 +50,10 @@ namespace ConsoleAppTest
             //e2.Evaluate();
 
             Console.ReadLine();
+
+            //IProducerConsumerCollection
+            //ConcurrentBag
+            BlockingCollection
         }
 
 
