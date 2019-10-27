@@ -171,6 +171,7 @@
     <Compile Include="ExpTree\Attribute\QueryCompareAttribute.cs" />
     <Compile Include="ExpTree\QueryExpression.cs" />
     <Compile Include="QRCode\QRCodeBuilder.cs" />
+    <Compile Include="Queue\ActionQueue.cs" />
     <Compile Include="Redis\RedisBase.cs" />
     <Compile Include="Redis\RedisHashCache.cs" />
     <Compile Include="Redis\RedisManager.cs" />
